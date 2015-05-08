@@ -2,7 +2,7 @@
 import cgi
 import urllib2
 import base64
-headers = { 'User-Agent' : 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36' }
+headers = { 'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:37.0) Gecko/20100101 Firefox/37.0' }
 def application(environ, start_response):
   status = '200 OK'
   form_data = cgi.FieldStorage(environ=environ, fp=environ['wsgi.input'])
