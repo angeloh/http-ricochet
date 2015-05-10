@@ -2,14 +2,25 @@
 import cgi
 import urllib2
 import base64
-headers = { 'User-Agent' : 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0' }
+import os
+
 def application(environ, start_response):
   status = '200 OK'
+  # request user-agent
+  user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A'
+  if os.environ["HTTP_USER_AGENT"]:
+    user_agent = os.environ["HTTP_USER_AGENT"]
+  headers = { 'User-Agent' :  user_agent }
+
+  # form data
   form_data = cgi.FieldStorage(environ=environ, fp=environ['wsgi.input'])
+
+  # response headers
   content_type = 'text/html; charset=utf-8'
   if form_data.getvalue('ct'):
     content_type = form_data.getvalue('ct')
   response_headers = [('Content-type', content_type)]
+
   url = urllib2.unquote(form_data.getvalue('url')).decode('utf8')
   response = urllib2.urlopen(urllib2.Request(url, None, headers)).read()
   if form_data.getvalue('encode'):
