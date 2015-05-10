@@ -12,6 +12,10 @@ pydir="/var/www/ricochet/"
 sudo mkdir -p "$pydir"
 sudo cp -r src/* "$pydir"
 
+# Configure log files
+sudo touch /var/log/ricochet.log
+sudo chmod 666 /var/log/ricochet.log
+
 # configure apache
 sudo cp apache/ricochet-apache.conf /etc/apache2/sites-enabled/
 sudo service apache2 restart
