@@ -35,7 +35,7 @@ def application(environ, start_response):
     'Referer' : referer,
     'Cookie' : cookie
   }
-  logging.debug("Request headers : " + headers)
+  logging.debug("Request headers : " + str(headers))
 
   # form data
   form_data = cgi.FieldStorage(environ=environ, fp=environ['wsgi.input'])
